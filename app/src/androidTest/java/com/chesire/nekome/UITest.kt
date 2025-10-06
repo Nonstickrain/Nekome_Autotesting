@@ -1,5 +1,6 @@
 package com.chesire.nekome
 
+import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.test.core.app.ActivityScenario
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -15,6 +16,8 @@ import com.chesire.nekome.helpers.login
 import com.chesire.nekome.helpers.logout
 import com.chesire.nekome.helpers.reset
 import com.chesire.nekome.ui.MainActivity
+import com.kaspersky.kaspresso.testcases.api.testcase.BaseTestCase
+import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import dagger.hilt.android.testing.HiltAndroidRule
 import javax.inject.Inject
 import kotlinx.coroutines.runBlocking
@@ -26,20 +29,20 @@ import org.junit.runner.RunWith
  * Provides a base class to use for all UI tests.
  */
 @RunWith(AndroidJUnit4::class)
-abstract class UITest {
+abstract class UITest : TestCase() {
 
     @Suppress("LeakingThis")
-    @get:Rule
+    @get:Rule(order = 0)
     val hilt = HiltAndroidRule(this)
 
-    @get:Rule
+    @get:Rule(order = 1)
     val clearDatabase = ClearDatabaseRule()
 
-    @get:Rule
+    @get:Rule(order = 2)
     val clearPreferences = ClearPreferencesRule()
 
-    @get:Rule
-    val composeTestRule = createComposeRule()
+    @get:Rule(order = 3)
+    val composeTestRule = createAndroidComposeRule<MainActivity>()
 
     @Inject
     lateinit var authProvider: AuthProvider
