@@ -47,6 +47,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.semantics
@@ -61,6 +62,10 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.chesire.nekome.core.compose.autofill
 import com.chesire.nekome.core.compose.theme.NekomeTheme
 import com.chesire.nekome.resources.StringResource
+
+const val CREDENTIALS_SCREEN_TEST_TAG =  "credentials_screen_test_tag"
+const val PASSWORD_INPUT_TEST_TAG = "password_input_test_tag"
+const val USERNAME_INPUT_TEST_TAG = "username_input_test_tag"
 
 @Composable
 fun CredentialsScreen(
@@ -112,14 +117,15 @@ private fun Render(
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
                 .padding(paddingValues)
-                .padding(16.dp),
+                .padding(16.dp)
+                .testTag(CREDENTIALS_SCREEN_TEST_TAG),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             HeaderImage()
             UsernameInput(
                 username = state.value.username,
                 isUsernameError = state.value.hasUsernameError,
-                onUsernameChanged = onUsernameChanged
+                onUsernameChanged = onUsernameChanged,
             )
             PasswordInput(
                 password = state.value.password,
@@ -201,6 +207,7 @@ private fun UsernameInput(
                 autofillTypes = listOf(AutofillType.EmailAddress, AutofillType.Username),
                 onFill = { onUsernameChanged(it) }
             )
+            .testTag(USERNAME_INPUT_TEST_TAG)
     )
 }
 
@@ -259,6 +266,7 @@ private fun PasswordInput(
                 autofillTypes = listOf(AutofillType.Password),
                 onFill = { onPasswordChanged(it) }
             )
+            .testTag(PASSWORD_INPUT_TEST_TAG)
     )
 }
 
