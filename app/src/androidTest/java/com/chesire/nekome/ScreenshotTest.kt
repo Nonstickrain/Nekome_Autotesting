@@ -7,12 +7,11 @@ import java.io.FileOutputStream
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
-
+/**
 abstract class ScreenshotTest: UITest() {
 
     /**
-     * Папка для сохранения скриншотов
-     */
+
     open val screenshotFolder: String by lazy {
         val dir = File(
             composeTestRule.activity.getExternalFilesDir(null),
@@ -31,7 +30,7 @@ abstract class ScreenshotTest: UITest() {
     }
 
     private fun captureComposeBitmap(): Bitmap {
-        val view: View = composeTestRule.activity.window.decorView.rootView
+        val view: View = testCaseRule.activity.window.decorView.rootView
         val bitmap = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
         val canvas = android.graphics.Canvas(bitmap)
         view.draw(canvas)
@@ -46,3 +45,4 @@ abstract class ScreenshotTest: UITest() {
         }
     }
 }
+        */

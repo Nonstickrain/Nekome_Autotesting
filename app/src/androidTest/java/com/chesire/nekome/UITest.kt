@@ -1,9 +1,10 @@
 package com.chesire.nekome
 
-import androidx.compose.ui.test.junit4.createAndroidComposeRule
-import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.junit4.createEmptyComposeRule
 import androidx.test.core.app.ActivityScenario
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.uiautomator.UiDevice
 import com.adevinta.android.barista.rule.cleardata.ClearDatabaseRule
 import com.adevinta.android.barista.rule.cleardata.ClearPreferencesRule
 import com.chesire.nekome.core.preferences.ApplicationPreferences
@@ -16,7 +17,6 @@ import com.chesire.nekome.helpers.login
 import com.chesire.nekome.helpers.logout
 import com.chesire.nekome.helpers.reset
 import com.chesire.nekome.ui.MainActivity
-import com.kaspersky.kaspresso.testcases.api.testcase.BaseTestCase
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import dagger.hilt.android.testing.HiltAndroidRule
 import javax.inject.Inject
@@ -41,8 +41,8 @@ abstract class UITest : TestCase() {
     @get:Rule(order = 2)
     val clearPreferences = ClearPreferencesRule()
 
-    @get:Rule(order = 3)
-    val composeTestRule = createAndroidComposeRule<MainActivity>()
+    @get:Rule
+    val composeTestRule = createEmptyComposeRule()
 
     @Inject
     lateinit var authProvider: AuthProvider
@@ -59,15 +59,16 @@ abstract class UITest : TestCase() {
     @Inject
     lateinit var seriesPreferences: SeriesPreferences
 
+
     /**
      * Flag for if the test should start with a logged in user.
      * Defaults to `true`, override to force the user to be logged out.
      */
     open val startLoggedIn: Boolean = true
-
+    open val uiDevice: UiDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
     /**
      * Initial setup method.
-     */
+*/
     @Before
     open fun setUp() {
         hilt.inject()
@@ -84,7 +85,6 @@ abstract class UITest : TestCase() {
             authProvider.logout()
         }
     }
-
     /**
      * Launches the [Activity] using the [ActivityScenario].
      */

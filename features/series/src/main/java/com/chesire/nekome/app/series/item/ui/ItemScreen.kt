@@ -53,6 +53,7 @@ import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
@@ -68,6 +69,9 @@ import com.chesire.nekome.resources.StringResource
 import com.google.accompanist.flowlayout.FlowMainAxisAlignment
 import com.google.accompanist.flowlayout.FlowRow
 import kotlin.math.round
+
+const val SERIES_DETAIL_TITLE_TEST_TAG = "series_detail_title_test_tag"
+const val SERIES_DETAIL_SCREEN_TEST_TAG = "series_details_screen_test_tag"
 
 @Composable
 fun ItemScreen(
@@ -144,6 +148,7 @@ private fun Render(
                 .verticalScroll(state = scrollableState)
                 .padding(horizontal = 16.dp)
                 .fillMaxSize()
+                .testTag(SERIES_DETAIL_SCREEN_TEST_TAG)
         ) {
             HeaderArea(
                 title = state.value.title,
@@ -238,7 +243,9 @@ private fun Title(title: String) {
     Text(
         text = title,
         style = MaterialTheme.typography.headlineSmall,
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier
+            .fillMaxWidth()
+            .testTag(SERIES_DETAIL_TITLE_TEST_TAG)
     )
 }
 

@@ -1,5 +1,6 @@
 package com.chesire.nekome.features
 
+import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import com.chesire.nekome.UITest
 import com.chesire.nekome.core.preferences.flags.HomeScreenOptions
 import com.chesire.nekome.robots.activity
@@ -15,7 +16,7 @@ class ActivityTests : UITest() {
         runBlocking { applicationPreferences.updateDefaultHomeScreen(HomeScreenOptions.Anime) }
         launchActivity()
 
-        activity(composeTestRule) {
+        activity(composeTestRule as ComposeContentTestRule) {
             validate {
                 isOnAnimeScreen()
             }
@@ -27,7 +28,7 @@ class ActivityTests : UITest() {
         runBlocking { applicationPreferences.updateDefaultHomeScreen(HomeScreenOptions.Manga) }
         launchActivity()
 
-        activity(composeTestRule) {
+        activity(composeTestRule as ComposeContentTestRule) {
             validate {
                 isOnMangaScreen()
             }
@@ -39,7 +40,7 @@ class ActivityTests : UITest() {
         runBlocking { applicationPreferences.updateDefaultHomeScreen(HomeScreenOptions.Manga) }
         launchActivity()
 
-        activity(composeTestRule) {
+        activity(composeTestRule as ComposeContentTestRule) {
             goToAnime()
             validate {
                 isOnAnimeScreen()
@@ -52,7 +53,7 @@ class ActivityTests : UITest() {
         runBlocking { applicationPreferences.updateDefaultHomeScreen(HomeScreenOptions.Anime) }
         launchActivity()
 
-        activity(composeTestRule) {
+        activity(composeTestRule as ComposeContentTestRule) {
             goToManga()
             validate {
                 isOnMangaScreen()
@@ -64,7 +65,7 @@ class ActivityTests : UITest() {
     fun overviewCanNavigateToSettingsView() {
         launchActivity()
 
-        activity(composeTestRule) {
+        activity(composeTestRule as ComposeContentTestRule) {
             goToSettings()
             validate {
                 isOnSettingsScreen()

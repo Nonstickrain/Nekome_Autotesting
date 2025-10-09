@@ -1,5 +1,6 @@
 package com.chesire.nekome.features.search
 
+import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import com.chesire.nekome.UITest
 import com.chesire.nekome.core.models.ErrorDomain
 import com.chesire.nekome.datasource.search.remote.SearchApi
@@ -41,13 +42,13 @@ class SearchTests : UITest() {
     fun canReachSearch() {
         launchActivity()
 
-        activity(composeTestRule) {
+        activity(composeTestRule as ComposeContentTestRule) {
             goToAnime()
         }
-        seriesList(composeTestRule) {
+        seriesList(composeTestRule as ComposeContentTestRule) {
             goToSearch()
         }
-        search(composeTestRule) {
+        search(composeTestRule as ComposeContentTestRule) {
             validate { isVisible() }
         }
     }
@@ -56,13 +57,13 @@ class SearchTests : UITest() {
     fun emptySearchTermShowsError() {
         launchActivity()
 
-        activity(composeTestRule) {
+        activity(composeTestRule as ComposeContentTestRule) {
             goToAnime()
         }
-        seriesList(composeTestRule) {
+        seriesList(composeTestRule as ComposeContentTestRule) {
             goToSearch()
         }
-        search(composeTestRule) {
+        search(composeTestRule as ComposeContentTestRule) {
             searchTerm("")
             selectAnime()
             clickSearch()
@@ -75,13 +76,13 @@ class SearchTests : UITest() {
     fun genericErrorFromSearchShowsError() {
         launchActivity()
 
-        activity(composeTestRule) {
+        activity(composeTestRule as ComposeContentTestRule) {
             goToAnime()
         }
-        seriesList(composeTestRule) {
+        seriesList(composeTestRule as ComposeContentTestRule) {
             goToSearch()
         }
-        search(composeTestRule) {
+        search(composeTestRule as ComposeContentTestRule) {
             searchTerm(GENERIC_ERROR)
             selectAnime()
             clickSearch()
@@ -94,13 +95,13 @@ class SearchTests : UITest() {
     fun noSeriesFoundErrorFromSearchShowsError() {
         launchActivity()
 
-        activity(composeTestRule) {
+        activity(composeTestRule as ComposeContentTestRule) {
             goToAnime()
         }
-        seriesList(composeTestRule) {
+        seriesList(composeTestRule as ComposeContentTestRule) {
             goToSearch()
         }
-        search(composeTestRule) {
+        search(composeTestRule as ComposeContentTestRule) {
             searchTerm(NO_RESULTS_ERROR)
             selectAnime()
             clickSearch()

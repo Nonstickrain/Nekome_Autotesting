@@ -1,5 +1,6 @@
 package com.chesire.nekome.features.login
 
+import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import com.chesire.nekome.UITest
 import com.chesire.nekome.datasource.auth.remote.AuthApi
 import com.chesire.nekome.datasource.auth.remote.AuthDomain
@@ -61,15 +62,15 @@ class LoginFlowTests : UITest() {
     fun navigateThroughLoginFlow() {
         launchActivity()
 
-        loginCredentials(composeTestRule) {
+        loginCredentials(composeTestRule as ComposeContentTestRule) {
             enterUsername("Username")
             enterPassword("Password")
             clickLogin()
         }
-        loginSyncing(composeTestRule) {
+        loginSyncing(composeTestRule as ComposeContentTestRule) {
             // Skipped over, too fast to test
         }
-        activity(composeTestRule) {
+        activity(composeTestRule as ComposeContentTestRule) {
             validate { isVisible() }
         }
     }

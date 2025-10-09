@@ -32,6 +32,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTag
@@ -49,6 +50,8 @@ import com.chesire.nekome.core.preferences.flags.ImageQuality
 import com.chesire.nekome.core.preferences.flags.Theme
 import com.chesire.nekome.core.preferences.flags.TitleLanguage
 import com.chesire.nekome.resources.StringResource
+
+const val SETTING_ELEMENT_TEST_TAG = "setting_element_test_tag"
 
 @Composable
 fun ConfigScreen(
@@ -274,7 +277,7 @@ private fun DefaultHomeScreenPreference(onDefaultHomeScreenClicked: () -> Unit) 
     PreferenceSection(
         title = stringResource(id = StringResource.settings_default_home_title),
         summary = stringResource(id = StringResource.settings_default_home_summary),
-        onClick = onDefaultHomeScreenClicked
+        onClick = onDefaultHomeScreenClicked,
     )
 }
 
@@ -397,7 +400,8 @@ private fun PreferenceSection(
         modifier = Modifier
             .fillMaxWidth()
             .clickable(enabled = onClick != null) { onClick?.invoke() }
-            .padding(horizontal = 16.dp, vertical = 8.dp),
+            .padding(horizontal = 16.dp, vertical = 8.dp)
+            .testTag(SETTING_ELEMENT_TEST_TAG),
         verticalArrangement = Arrangement.Center
     ) {
         Text(

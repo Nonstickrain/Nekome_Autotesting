@@ -64,8 +64,9 @@ import com.chesire.nekome.core.compose.theme.NekomeTheme
 import com.chesire.nekome.resources.StringResource
 
 const val CREDENTIALS_SCREEN_TEST_TAG =  "credentials_screen_test_tag"
-const val PASSWORD_INPUT_TEST_TAG = "password_input_test_tag"
+const val LOGIN_BUTTON_TEST_TAG = "login_button_test_tag"
 const val USERNAME_INPUT_TEST_TAG = "username_input_test_tag"
+const val PASSWORD_INPUT_TEST_TAG = "password_input_test_tag"
 
 @Composable
 fun CredentialsScreen(
@@ -294,7 +295,8 @@ private fun LoginButton(isEnabled: Boolean, isLoggingIn: Boolean, onLoginPressed
                 onLoginPressed()
                 keyboardController?.hide()
             }
-        }
+        },
+        modifier = Modifier.testTag(LOGIN_BUTTON_TEST_TAG)
     ) {
         Text(text = stringResource(id = StringResource.login_login))
     }
