@@ -1,5 +1,6 @@
 package com.chesire.nekome.features.login
 
+import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import com.chesire.nekome.UITest
 import com.chesire.nekome.datasource.auth.remote.AuthApi
 import com.chesire.nekome.datasource.auth.remote.AuthFailure
@@ -22,7 +23,7 @@ class CredentialsTests : UITest() {
     fun emptyUsernameShowsError() {
         launchActivity()
 
-        loginCredentials(composeTestRule) {
+        loginCredentials(composeTestRule as ComposeContentTestRule) {
             enterUsername("")
             enterPassword("Password")
             clickLogin()
@@ -35,7 +36,7 @@ class CredentialsTests : UITest() {
     fun emptyPasswordShowsError() {
         launchActivity()
 
-        loginCredentials(composeTestRule) {
+        loginCredentials(composeTestRule as ComposeContentTestRule) {
             enterUsername("Username")
             enterPassword("")
             clickLogin()
@@ -54,7 +55,7 @@ class CredentialsTests : UITest() {
 
         launchActivity()
 
-        loginCredentials(composeTestRule) {
+        loginCredentials(composeTestRule as ComposeContentTestRule) {
             enterUsername("Username")
             enterPassword("Password")
             clickLogin()
@@ -73,7 +74,7 @@ class CredentialsTests : UITest() {
 
         launchActivity()
 
-        loginCredentials(composeTestRule) {
+        loginCredentials(composeTestRule as ComposeContentTestRule) {
             enterUsername("Username")
             enterPassword("Password")
             clickLogin()

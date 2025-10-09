@@ -1,5 +1,6 @@
 package com.chesire.nekome.features.series
 
+import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import com.chesire.nekome.UITest
 import com.chesire.nekome.core.flags.SeriesType
 import com.chesire.nekome.core.flags.UserSeriesStatus
@@ -26,7 +27,7 @@ class SeriesListTests : UITest() {
     fun canReachSeriesList() {
         launchActivity()
 
-        seriesList(composeTestRule) {
+        seriesList(composeTestRule as ComposeContentTestRule) {
             validate { isVisible() }
         }
     }
@@ -35,7 +36,7 @@ class SeriesListTests : UITest() {
     fun emptyListDisplaysEmptyView() {
         launchActivity()
 
-        seriesList(composeTestRule) {
+        seriesList(composeTestRule as ComposeContentTestRule) {
             validate { isEmptyDisplayed() }
         }
     }
@@ -47,7 +48,7 @@ class SeriesListTests : UITest() {
         }
         launchActivity()
 
-        seriesList(composeTestRule) {
+        seriesList(composeTestRule as ComposeContentTestRule) {
             validate {
                 isListDisplayed()
                 listCount(1)
@@ -99,7 +100,7 @@ class SeriesListTests : UITest() {
         }
         launchActivity()
 
-        seriesList(composeTestRule) {
+        seriesList(composeTestRule as ComposeContentTestRule) {
             refreshList()
         } validate {
             listCount(2)
@@ -133,7 +134,7 @@ class SeriesListTests : UITest() {
         }
         launchActivity()
 
-        seriesList(composeTestRule) {
+        seriesList(composeTestRule as ComposeContentTestRule) {
             refreshList()
         } validate {
             isRefreshSeriesError()
@@ -172,7 +173,7 @@ class SeriesListTests : UITest() {
         }
         launchActivity()
 
-        seriesList(composeTestRule) {
+        seriesList(composeTestRule as ComposeContentTestRule) {
             incrementSeriesByOne(0)
         } validate {
             seriesProgress(0, 1, 24)
@@ -212,7 +213,7 @@ class SeriesListTests : UITest() {
         }
         launchActivity()
 
-        seriesList(composeTestRule) {
+        seriesList(composeTestRule as ComposeContentTestRule) {
             incrementSeriesByOne(0)
         } validate {
             isRatingDialogNotDisplayed()
@@ -252,7 +253,7 @@ class SeriesListTests : UITest() {
         }
         launchActivity()
 
-        seriesList(composeTestRule) {
+        seriesList(composeTestRule as ComposeContentTestRule) {
             incrementSeriesByOne(0)
         } validate {
             isRatingDialogDisplayed()

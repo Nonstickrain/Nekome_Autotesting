@@ -16,6 +16,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.toMutableStateMap
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTag
@@ -25,6 +26,8 @@ import androidx.compose.ui.window.Dialog
 import com.chesire.nekome.core.compose.theme.NekomeTheme
 import com.chesire.nekome.core.flags.UserSeriesStatus
 import com.chesire.nekome.resources.StringResource
+
+const val FILTER_ROW_TEST_TAG = "filter_row_test_tag"
 
 @Composable
 fun FilterDialog(
@@ -69,7 +72,8 @@ private fun Render(
                                         !selectedFilters.getValue(filter.userStatus)
                                 }
                             )
-                            .padding(horizontal = 16.dp),
+                            .padding(horizontal = 16.dp)
+                            .testTag(FILTER_ROW_TEST_TAG),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Checkbox(

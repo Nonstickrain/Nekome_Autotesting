@@ -62,6 +62,7 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTag
@@ -79,6 +80,11 @@ import com.chesire.nekome.core.flags.UserSeriesStatus
 import com.chesire.nekome.core.preferences.flags.SortOption
 import com.chesire.nekome.resources.StringResource
 
+const val SERIES_COLLECTION_SCREEN_TEST_TAG = "series_collection_screen_test_tag"
+const val ADD_NEW_BUTTON_TEST_TAG = "add_new_button_test_tag"
+const val SERIES_TITLE_TEST_TAG = "series_title_test_tag"
+const val SERIES_CARD_LIST_TEST_TAG = "series_card_list_test_tag"
+
 @Composable
 fun CollectionScreen(
     viewModel: CollectionViewModel = hiltViewModel(),
@@ -86,7 +92,6 @@ fun CollectionScreen(
     navigateToSearch: () -> Unit
 ) {
     val state = viewModel.uiState.collectAsState()
-
     state.value.seriesDetails?.let {
         LaunchedEffect(it.show) {
             navigateToItem(it.seriesId)
@@ -191,12 +196,14 @@ private fun Render(
                         )
                     },
                     onClick = onSearchPressed,
-                    modifier = Modifier.semantics { testTag = SeriesCollectionTags.SearchFab },
-                    shape = RoundedCornerShape(8.dp)
+                    modifier = Modifier
+                        .testTag(ADD_NEW_BUTTON_TEST_TAG),
+                    shape = RoundedCornerShape(8.dp),
                 )
             }
         },
-        modifier = Modifier.semantics { testTag = SeriesCollectionTags.Root }
+        modifier = Modifier
+            .testTag(SERIES_COLLECTION_SCREEN_TEST_TAG)
     ) { paddingValues ->
         if (state.value.isInitializing) {
             CircularProgressIndicator()
@@ -253,7 +260,9 @@ private fun SeriesCollection(
                 .semantics { testTag = SeriesCollectionTags.RefreshContainer }
         ) {
             LazyColumn(
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier
+                    .fillMaxSize()
+                    .testTag(SERIES_CARD_LIST_TEST_TAG),
                 state = listState,
                 contentPadding = PaddingValues(
                     start = 8.dp,
@@ -350,6 +359,7 @@ private fun SeriesItem(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(0.dp, 0.dp, 0.dp, 8.dp)
+                            .testTag(SERIES_TITLE_TEST_TAG)
                     )
                     Text(
                         text = "${model.subtype}   $dateString",

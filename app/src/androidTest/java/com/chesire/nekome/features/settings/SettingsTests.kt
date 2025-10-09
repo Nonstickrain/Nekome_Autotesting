@@ -1,5 +1,6 @@
 package com.chesire.nekome.features.settings
 
+import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import com.chesire.nekome.UITest
 import com.chesire.nekome.robots.activity
 import com.chesire.nekome.robots.settings.config
@@ -13,10 +14,10 @@ class SettingsTests : UITest() {
     fun canReachSettings() {
         launchActivity()
 
-        activity(composeTestRule) {
+        activity(composeTestRule as ComposeContentTestRule) {
             goToSettings()
         }
-        config(composeTestRule) {
+        config(composeTestRule as ComposeContentTestRule) {
             validate { isVisible() }
         }
     }
@@ -25,10 +26,10 @@ class SettingsTests : UITest() {
     fun changeDefaultSeriesState() {
         launchActivity()
 
-        activity(composeTestRule) {
+        activity(composeTestRule as ComposeContentTestRule) {
             goToSettings()
         }
-        config(composeTestRule) {
+        config(composeTestRule as ComposeContentTestRule) {
             clickDefaultSeriesState()
 
             defaultSeriesState {
@@ -87,10 +88,10 @@ class SettingsTests : UITest() {
     fun changeDefaultHomeScreenState() {
         launchActivity()
 
-        activity(composeTestRule) {
+        activity(composeTestRule as ComposeContentTestRule) {
             goToSettings()
         }
-        config(composeTestRule) {
+        config(composeTestRule as ComposeContentTestRule) {
             clickDefaultHomeScreen()
 
             defaultHomeScreen {
@@ -122,10 +123,10 @@ class SettingsTests : UITest() {
     fun changeImageQuality() {
         launchActivity()
 
-        activity(composeTestRule) {
+        activity(composeTestRule as ComposeContentTestRule) {
             goToSettings()
         }
-        config(composeTestRule) {
+        config(composeTestRule as ComposeContentTestRule) {
             clickImageQuality()
 
             imageQuality {
@@ -160,10 +161,10 @@ class SettingsTests : UITest() {
     fun changeTitleLanguage() {
         launchActivity()
 
-        activity(composeTestRule) {
+        activity(composeTestRule as ComposeContentTestRule) {
             goToSettings()
         }
-        config(composeTestRule) {
+        config(composeTestRule as ComposeContentTestRule) {
             clickTitleLanguage()
 
             titleLanguage {
@@ -198,10 +199,10 @@ class SettingsTests : UITest() {
     fun changeThemeSetting() {
         launchActivity()
 
-        activity(composeTestRule) {
+        activity(composeTestRule as ComposeContentTestRule) {
             goToSettings()
         }
-        config(composeTestRule) {
+        config(composeTestRule as ComposeContentTestRule) {
             clickTheme()
 
             changeTheme {
@@ -242,10 +243,10 @@ class SettingsTests : UITest() {
     fun changeRateOnCompletionSetting() {
         launchActivity()
 
-        activity(composeTestRule) {
+        activity(composeTestRule as ComposeContentTestRule) {
             goToSettings()
         }
-        config(composeTestRule) {
+        config(composeTestRule as ComposeContentTestRule) {
             changeRateOnComplete()
         }
     }
@@ -254,10 +255,10 @@ class SettingsTests : UITest() {
     fun openOSS() {
         launchActivity()
 
-        activity(composeTestRule) {
+        activity(composeTestRule as ComposeContentTestRule) {
             goToSettings()
         }
-        config(composeTestRule) {
+        config(composeTestRule as ComposeContentTestRule) {
             goToLicenses()
         }
     }

@@ -1,5 +1,6 @@
 package com.chesire.nekome.features.series
 
+import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import com.chesire.nekome.UITest
 import com.chesire.nekome.core.flags.SeriesType
 import com.chesire.nekome.core.flags.UserSeriesStatus
@@ -27,7 +28,7 @@ class SortTests : UITest() {
     fun sortDialogDisplaysWithAllOptions() {
         launchActivity()
 
-        seriesList(composeTestRule) {
+        seriesList(composeTestRule as ComposeContentTestRule) {
             sortSeries {
                 open()
             } validate {
@@ -41,7 +42,7 @@ class SortTests : UITest() {
     fun sortDialogClosesOnOptionSelected() {
         launchActivity()
 
-        seriesList(composeTestRule) {
+        seriesList(composeTestRule as ComposeContentTestRule) {
             sortSeries {
                 open()
                 selectByTitle()
@@ -57,7 +58,7 @@ class SortTests : UITest() {
         // default order is by id
         launchActivity()
 
-        seriesList(composeTestRule) {
+        seriesList(composeTestRule as ComposeContentTestRule) {
             sortSeries {
                 open()
                 selectByDefault()
@@ -79,7 +80,7 @@ class SortTests : UITest() {
     fun sortOptionTitleSortsInTitleOrder() {
         launchActivity()
 
-        seriesList(composeTestRule) {
+        seriesList(composeTestRule as ComposeContentTestRule) {
             sortSeries {
                 open()
                 selectByTitle()
@@ -101,7 +102,7 @@ class SortTests : UITest() {
     fun sortOptionStartDateSortsInStartDateOrder() {
         launchActivity()
 
-        seriesList(composeTestRule) {
+        seriesList(composeTestRule as ComposeContentTestRule) {
             sortSeries {
                 open()
                 selectByStartDate()
@@ -123,7 +124,7 @@ class SortTests : UITest() {
     fun sortOptionEndDateSortsInEndDateOrder() {
         launchActivity()
 
-        seriesList(composeTestRule) {
+        seriesList(composeTestRule as ComposeContentTestRule) {
             sortSeries {
                 open()
                 selectByEndDate()
@@ -145,7 +146,7 @@ class SortTests : UITest() {
     fun sortOptionRatingSortsInRatingOrder() {
         launchActivity()
 
-        seriesList(composeTestRule) {
+        seriesList(composeTestRule as ComposeContentTestRule) {
             sortSeries {
                 open()
                 selectByRating()
