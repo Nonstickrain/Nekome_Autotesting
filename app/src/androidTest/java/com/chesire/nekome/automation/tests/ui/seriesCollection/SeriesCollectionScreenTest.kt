@@ -1,10 +1,6 @@
 package com.chesire.nekome.automation.tests.ui.seriesCollection
 
-import androidx.compose.ui.test.assertIsDisplayed
-import androidx.compose.ui.test.assertTextContains
-import androidx.compose.ui.test.onAllNodesWithTag
 import com.chesire.nekome.UITest
-import com.chesire.nekome.app.series.collection.ui.SERIES_TITLE_TEST_TAG
 import com.chesire.nekome.automation.scenarios.SearchScenario
 import com.chesire.nekome.automation.scenarios.SetFiltersScenario
 import com.chesire.nekome.automation.screens.search.SearchScreen
@@ -12,7 +8,6 @@ import com.chesire.nekome.automation.screens.seriesCollection.SeriesCollectionSc
 import com.chesire.nekome.automation.screens.seriesDetail.SeriesDetailScreen
 import com.chesire.nekome.core.flags.SeriesType
 import com.chesire.nekome.core.flags.UserSeriesStatus
-import com.chesire.nekome.datasource.series.remote.SeriesApi
 import com.chesire.nekome.helpers.SeriesMockData
 import com.chesire.nekome.injection.MockLibraryModule
 import com.chesire.nekome.injection.MockSearchModule
@@ -22,28 +17,31 @@ import org.junit.Test
 import io.github.kakaocup.compose.node.element.ComposeScreen.Companion.onComposeScreen
 import io.mockk.clearAllMocks
 import org.junit.Before
-import javax.inject.Inject
 
 @HiltAndroidTest
 class SeriesCollectionScreenTest : UITest() {
 
-    @Inject
-    lateinit var seriesApi: SeriesApi
-
-   @Before
+    @Before
     fun setup() {
         clearAllMocks()
     }
 
     private val userId = 0
-    private val firstAnime = SeriesMockData(id = 1, title = "Naruto", userSeriesStatus = UserSeriesStatus.Current)
-    private val secondAnime = SeriesMockData(id = 2, title = "Valve", userSeriesStatus = UserSeriesStatus.OnHold)
+    private val firstAnime =
+        SeriesMockData(id = 1, title = "Naruto", userSeriesStatus = UserSeriesStatus.Current)
+    private val secondAnime =
+        SeriesMockData(id = 2, title = "Valve", userSeriesStatus = UserSeriesStatus.OnHold)
 
     @Test
     @DisplayName("Проверка добавления нового аниме в коллекцию")
     fun addNewSeriesToCollectionTest() = before {
         MockSearchModule.oneItemSearchMock(firstAnime.id, firstAnime.title, SeriesType.Anime)
-        MockLibraryModule.addOneAnimeItemMock(userId, firstAnime.id, firstAnime.userSeriesStatus,firstAnime.title)
+        MockLibraryModule.addOneAnimeItemMock(
+            userId,
+            firstAnime.id,
+            firstAnime.userSeriesStatus,
+            firstAnime.title
+        )
         launchActivity()
     }.after {}.run {
         step("Поиск аниме по названию") {
@@ -66,10 +64,7 @@ class SeriesCollectionScreenTest : UITest() {
         step("Проверка наличия добавленного аниме") {
             onComposeScreen<SeriesCollectionScreen>(composeTestRule) {
                 flakySafely {
-                    composeTestRule.onAllNodesWithTag(
-                        SERIES_TITLE_TEST_TAG,
-                        true
-                    )[0].assertIsDisplayed()
+                    checkSeriesTitle(0, composeTestRule, firstAnime.title)
                 }
             }
         }
@@ -97,10 +92,7 @@ class SeriesCollectionScreenTest : UITest() {
         step("Проверить отображение экрана под 2 фильтрами") {
             onComposeScreen<SeriesCollectionScreen>(composeTestRule) {
                 flakySafely {
-                    composeTestRule.onAllNodesWithTag(
-                        SERIES_TITLE_TEST_TAG,
-                        true
-                    )[0].assertTextContains(secondAnime.title)
+                    checkSeriesTitle(0, composeTestRule, secondAnime.title)
                 }
             }
         }
@@ -112,10 +104,7 @@ class SeriesCollectionScreenTest : UITest() {
         step("Проверить отображение экрана под 2 фильтрами") {
             onComposeScreen<SeriesCollectionScreen>(composeTestRule) {
                 flakySafely {
-                    composeTestRule.onAllNodesWithTag(
-                        SERIES_TITLE_TEST_TAG,
-                        true
-                    )[0].assertTextContains(firstAnime.title)
+                    checkSeriesTitle(0, composeTestRule, firstAnime.title)
                 }
             }
         }

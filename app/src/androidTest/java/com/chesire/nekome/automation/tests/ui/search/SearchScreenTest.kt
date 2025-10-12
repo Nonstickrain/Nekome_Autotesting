@@ -32,8 +32,6 @@ class SearchScreenTest : UITest() {
         step("Проверка результата поиска. Отображается только манга") {
             onComposeScreen<SearchScreen>(composeTestRule) {
                 flakySafely {
-                    composeTestRule.onRoot(useUnmergedTree = true)
-                        .printToLog("Дерево SeriesCollectionScreen")
                     getSearchItemTitle(0, composeTestRule) {
                         assertTextContains(animeTitle1)
                     }
